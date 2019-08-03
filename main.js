@@ -8,6 +8,8 @@ $(function () {
 
     $newItemButton.show();
     $newItemForm.hide();
+    $('p').hide();
+    $list.show();
 
     $('li').hide().each(function (index) {
         $(this).delay(450 * index).fadeIn(1600);
@@ -17,6 +19,12 @@ $(function () {
         const items = $('li').length;
 
         $('#counter').text(items);
+
+        if ($('li').length === 0) {
+            $('p').show();
+        } else {
+            $('p').hide();
+        }
     }
     updateCount();
 
@@ -36,6 +44,12 @@ $(function () {
         updateCount();
     })
 
+    $list.on('mouseover', 'li', function () {
+        const information = 'usuń element z listy';
+
+        $('li').attr('title', information);
+    })
+
     $list.on('click', 'li', function () {
         const complete = $(this).hasClass('complete');
 
@@ -49,4 +63,5 @@ $(function () {
             updateCount();
         }
     });
+
 });
